@@ -22,7 +22,7 @@ export const Home = () => {
     const categories = [
         { name: "people", imageUrl: "https://starwars-visualguide.com/assets/img/categories/character.jpg" },
         { name: "films", imageUrl: "https://starwars-visualguide.com/assets/img/categories/films.jpg" },
-        { name: "species", imageUrl: "https://starwars-visualguide.com/assets/img/species/3.jpg" },
+        { name: "species", imageUrl: "https://parade.com/.image/c_limit%2Ccs_srgb%2Cq_auto:good%2Cw_1400/MTk1NjEyNDIwNDA2NzgxMzI1/star-wars-trivia-yoda.webp" },
         { name: "planets", imageUrl: "https://starwars-visualguide.com/assets/img/planets/7.jpg" },
         { name: "starships", imageUrl: "https://starwars-visualguide.com/assets/img/starships/13.jpg" },
         { name: "vehicles", imageUrl: "https://starwars-visualguide.com/assets/img/vehicles/20.jpg" }
@@ -35,7 +35,7 @@ export const Home = () => {
             <h1 className="titulo2">Wars</h1>
             <div className="row">
                 {categories.map((category) => (
-                    <div className="col-md-4" key={category.name} onClick={() => {
+                    <div className="cardHome" key={category.name} onClick={() => {
                         actions.setSelectedCategory(category.name);
                         navigate("/demo");
                     }}>
@@ -43,8 +43,8 @@ export const Home = () => {
                             {category.imageUrl && (
                                 <img src={category.imageUrl} className="card-img-top" alt={category.name} />
                             )}
-                            <div className="card-body">
-                                <h5 className="card-title">{category.name}</h5>
+                            <div className="card-bodyHome">
+                                <h3 className="card-titleHome">{category.name}</h3>
                             </div>
                         </div>
                     </div>

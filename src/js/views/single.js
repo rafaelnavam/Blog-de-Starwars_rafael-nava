@@ -1,6 +1,9 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom"; 
 import { Context } from "../store/appContext";
+import "../../styles/single.css";
+
+
 
 export const Single = () => {
     const { store } = useContext(Context);
@@ -17,14 +20,19 @@ export const Single = () => {
     console.log(itemDetail.properties.name);
     // Renderizar la descripción del ítem
     return (
-        <div className="jumbotron">
-        <h1>{itemDetail.properties.name || "Nombre no disponible"}</h1>
+        <div className="d-flex justify-content-center">
+        <div className="cardSingle" style={{ width: "18rem" }}>
+    <img src="https://starwars-visualguide.com/assets/img/placeholder.jpg" className="card-img-top" alt="..." />
+    <div className="card-bodySingle">
+        <h2 className="card-titleSingle">{itemDetail.properties.name || "Nombre no disponible"}</h2>
         {Object.entries(itemDetail.properties).map(([key, value]) => (
-            <p key={key}>
-                {key}: {value || "No especificado"}
+            <p className="card-textSingle" key={key}>
+                <strong>{key}:</strong> {value || "No especificado"}
             </p>
         ))}
     </div>
+</div>
+</div>
 
     );
 };

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import "../../styles/demo.css";
+
 
 const getState = ({ getStore, getActions, setStore }) => {
     return {
@@ -23,15 +25,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     let url = pageUrl || `https://www.swapi.tech/api/${category}/`;
                     let response = await fetch(url);
-        
+
                     if (!response.ok) {
                         throw new Error(`No se pudieron recuperar los datos: ${response.statusText}`);
                     }
-        
+
                     let data = await response.json();
-        
+
                     console.log("Data loaded:", data); // Agregamos un console.log para ver los datos cargados
-        
+
                     if (categoryDetail || pageUrl) {
                         let store = getStore();
                         setStore({ ...store, [`${category}${categoryDetail ? "_details" : ""}`]: data });
@@ -44,41 +46,47 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error(error.message);
                 }
             },
-            renderItems: (data, category) => {
-                const navigate = useNavigate()
+         renderItems : (data, category) => {
+                const navigate = useNavigate(); // Mueve la declaración de navigate aquí dentro
+            
                 if (data.results) {
-                    return data.results.map((item, index) => ( 
-                        <li key={index} className="list-group-item">
-                            {item.name || (item.properties && item.properties.title) || "Título no disponible"}
-                            <button onClick={() => {
-                                console.log("Loading detail for item:", item); // Agregamos un console.log para ver qué elemento se está cargando
-                                getActions().loadDetail(item.url, navigate);
-                            }}>Detalle</button>
-                        </li>
+                    return data.results.map((item, index) => (
+                        <div className="cardDemo" key={index} onClick={() => {
+                            console.log("Loading detail for item:", item);
+                            getActions().loadDetail(item.url, navigate);
+                        }}>
+                            <img src="https://starwars-visualguide.com/assets/img/placeholder.jpg" className="card-img-top" alt="..." />
+                            <div className="card-bodyDemo">
+                                <h5 className="card-titleDemo">{item.name || (item.properties && item.properties.title) || "Título no disponible"}</h5>
+                           </div>
+                        </div>
                     ));
                 } else if (data.result) {
                     return data.result.map((item, index) => (
-                        <li key={index} className="list-group-item">
-                            {item.name || (item.properties && item.properties.title) || "Título no disponible"}
-                            <button onClick={() => {
-                                console.log("Loading detail for item:", item); // Agregamos un console.log para ver qué elemento se está cargando
-                                getActions().loadDetail(item.url, navigate);
-                            }}>Detalle</button>
-                        </li>
+                        <div className="cardDemo" key={index} onClick={() => {
+                            console.log("Loading detail for item:", item);
+                            getActions().loadDetail(item.url, navigate);
+                        }}>
+                            <img src="https://starwars-visualguide.com/assets/img/placeholder.jpg" className="card-img-top" alt="..." />
+                            <div className="card-bodyDemo">
+                                <h5 className="card-titleDemo">{item.name || (item.properties && item.properties.title) || "Título no disponible"}</h5>
+                            </div>
+                        </div>
                     ));
                 } else {
-                    return <li className="list-group-item">Cargando...</li>;
+                    return <>Cargando...</>;
                 }
             },
+            
             loadDetail: async (itemUrl, navigate) => {
                 try {
                     let url = itemUrl;
                     let response = await fetch(url);
-        
+
                     if (!response.ok) {
                         throw new Error(`No se pudieron recuperar los datos: ${response.statusText}`);
                     }
-        
+
                     let data = await response.json();
                     console.log("Detail data loaded:", data); // Agregamos un console.log para ver los datos del detalle cargados
                     let store = getStore();
@@ -89,7 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error(error.message);
                 }
             },
-            
+
 
 
 

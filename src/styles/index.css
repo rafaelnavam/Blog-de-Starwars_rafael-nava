@@ -3,17 +3,18 @@
 */
 body {
   margin: 0;
-  overflow: hidden; /* Evita el desplazamiento vertical cuando se aplica el desenfoque */
+  /* overflow: hidden; Evita el desplazamiento vertical cuando se aplica el desenfoque */
   position: relative; /* Permite que el pseudo-elemento esté posicionado en relación con el cuerpo */
   font-family: "Josefin Sans", sans-serif;
+  color: white;
 }
 
 body::before {
   content: "";
-  background-image: url(https://blog.camaralia.com/wp-content/uploads/2016/01/Star-Wars-Blu-ray1.jpg);
+  background-image: url(https://dam.ngenespanol.com/wp-content/uploads/2021/05/GettyImages-512447252.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  filter: blur(7px); /* Ajusta el valor según tu preferencia de desenfoque */
+  filter: blur(0px); /* Ajusta el valor según tu preferencia de desenfoque */
   position: fixed; /* Fija el pseudo-elemento en la ventana gráfica */
   top: 0;
   left: 0;

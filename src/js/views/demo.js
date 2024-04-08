@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/demo.css";
+
 
 export const Demo = () => {
     const { store, actions } = useContext(Context);
@@ -41,12 +43,16 @@ export const Demo = () => {
     return (
         <div className="container">
             <div className="row">
-                <h1>{store.selectedCategory}</h1>
-                <button onClick={loadPreviousPage}>Anterior</button>
-                <button onClick={loadNextPage}>Siguiente</button>
-                <ul className="list-group">
+            <div className="col-12 d-flex justify-content-between align-items-center">
+    <h1 className="text-end">{store.selectedCategory}</h1>
+    <div>
+        <button onClick={loadPreviousPage} className="me-2">Anterior</button>
+        <button onClick={loadNextPage}>Siguiente</button>
+    </div>
+</div>
+
+
                     {store[store.selectedCategory] && actions.renderItems(store[store.selectedCategory], store.selectedCategory)}
-                </ul>
             </div>
         </div>
     );

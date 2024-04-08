@@ -1,20 +1,12 @@
-/* Estilos para la carta */
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.col-12 {
-margin-top: 50px;
-
+.col-4 img{
+    height: 20rem;
+    width: 10rem;
 }
 
 
 /* Estilos para la carta */
-.cardDemo {
-    width: 15%;
+.cardSingle {
+    width: 27%;
     border-radius: 10px; /* Borde redondeado */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
     transition: transform 0.3s ease; /* Transición al hacer clic */
@@ -22,40 +14,46 @@ margin-top: 50px;
     padding: 0%;
     text-align: center;
     background: white;
+    color: black;
     padding: 1px;
     
 }
 
-.card-titleDemo {
+.card-titleSingle {
 
     font-family: "Star Jedi", sans-serif;
     font-weight: 800;
-    font-size: 20px;
+    font-size: 35px;
     letter-spacing: -2px;
+    text-align: center;
+    color: #FFD700;
+    margin: 0%;
+}
+
+.card-textSingle{
+    font-family: "Star Jedi", sans-serif;
+
+    letter-spacing: -1px;
     text-align: center;
     color: #797979;
     margin: 0%;
 }
 
 /* Estilos para la imagen dentro de la carta */
-.cardDemo img {
+.cardSingle img {
 
     height: 150px;
     border-radius: 10px;
 }
 
 
-.card-bodyDemo {
+.card-bodySingle {
     padding: 0%;
 }
 
-
-/* Estilos al pasar el mouse sobre la carta */
-.cardDemo:hover {
-    transform: translateY(-5px); /* Eleva la carta cuando se pasa el mouse */
-}
-
-/* Estilos al hacer clic en la carta */
-.cardDemo:active {
-    transform: translateY(2px); /* Efecto de hundimiento al hacer clic */
+/* Estilos para el título de la carta */
+.cardHome-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 10px;
 }
