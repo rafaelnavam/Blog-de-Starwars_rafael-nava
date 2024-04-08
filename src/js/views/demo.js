@@ -1,43 +1,53 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from "../store/appContext";
 
-import "../../styles/demo.css";
-
 export const Demo = () => {
-	const { store, actions } = useContext(Context);
+    const { store, actions } = useContext(Context);
 
-	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
-		</div>
-	);
+    useEffect(() => {
+        // Cargar datos cuando el componente se monte
+        actions.loadDataStartWars("films");
+        actions.loadDataStartWars("people");
+        actions.loadDataStartWars("planets");
+        actions.loadDataStartWars("species");
+        actions.loadDataStartWars("starships");
+        actions.loadDataStartWars("vehicles");
+    }, []);
+
+
+    useEffect(() => {
+        if (store.selectedCategory) {
+            actions.loadDataStartWars(store.selectedCategory);
+        }
+    }, [store.selectedCategory]);
+
+    const loadNextPage = () => {
+        // Función para cargar la página siguiente
+        const categoryData = store[store.selectedCategory];
+        if (categoryData && categoryData.next) {
+            actions.loadDataStartWars(store.selectedCategory, null, categoryData.next);
+        }
+    };
+    
+    const loadPreviousPage = () => {
+        // Función para cargar la página anterior
+        const categoryData = store[store.selectedCategory];
+        if (categoryData && categoryData.previous) {
+            actions.loadDataStartWars(store.selectedCategory, null, categoryData.previous);
+        }
+    };
+
+    return (
+        <div className="container">
+            <div className="row">
+                <h1>{store.selectedCategory}</h1>
+                <button onClick={loadPreviousPage}>Anterior</button>
+                <button onClick={loadNextPage}>Siguiente</button>
+                <ul className="list-group">
+                    {store[store.selectedCategory] && actions.renderItems(store[store.selectedCategory], store.selectedCategory)}
+                </ul>
+            </div>
+        </div>
+    );
 };

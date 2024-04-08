@@ -1,26 +1,30 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { useParams } from "react-router-dom"; 
 import { Context } from "../store/appContext";
 
-export const Single = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
-	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
+export const Single = () => {
+    const { store } = useContext(Context);
+    const params = useParams(); // Obtener los parámetros de la URL
 
-			<hr className="my-4" />
+    // Obtener el detalle del ítem seleccionado utilizando el índice pasado en los parámetros
+    const itemDetail = store.currentDetail.result;
 
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
-	);
-};
+    // Verificar si itemDetail está definido
+    if (!itemDetail) {
+        return <div>Loading...</div>; 
+    }
 
-Single.propTypes = {
-	match: PropTypes.object
+    console.log(itemDetail.properties.name);
+    // Renderizar la descripción del ítem
+    return (
+        <div className="jumbotron">
+        <h1>{itemDetail.properties.name || "Nombre no disponible"}</h1>
+        {Object.entries(itemDetail.properties).map(([key, value]) => (
+            <p key={key}>
+                {key}: {value || "No especificado"}
+            </p>
+        ))}
+    </div>
+
+    );
 };
