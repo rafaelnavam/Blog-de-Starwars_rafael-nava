@@ -1,48 +1,47 @@
-import React, { useState, useEffect } from "react";
-import getState from "./flux.js";
+import React, { useState, useEffect } from "react"; // Importar React y los hooks useState y useEffect desde 'react'
+import getState from "./flux.js"; // Importar la función getState desde './flux.js'
 
-// Don't change, here is where we initialize our context, by default it's just going to be null.
-export const Context = React.createContext(null);
+// No cambiar, aquí es donde inicializamos nuestro contexto, por defecto será null.
+export const Context = React.createContext(null); // Crear y exportar el contexto como una constante
 
-// This function injects the global store to any view/component where you want to use it, we will inject the context to layout.js, you can see it here:
-// https://github.com/4GeeksAcademy/react-hello-webapp/blob/master/src/js/layout.js#L35
+// Esta función inyecta el almacenamiento global a cualquier vista/componente donde desee usarlo.
 const injectContext = PassedComponent => {
-	const StoreWrapper = props => {
-		//this will be passed as the contenxt value
-		const [state, setState] = useState(
-			getState({
-				getStore: () => state.store,
-				getActions: () => state.actions,
-				setStore: updatedStore =>
-					setState({
-						store: Object.assign(state.store, updatedStore),
-						actions: { ...state.actions }
-					})
-			})
-		);
+    const StoreWrapper = props => {
+        // Esto se pasará como el valor del contexto
+        const [state, setState] = useState( // Utilizar el hook useState para inicializar el estado
+            getState({ // Obtener el estado inicial del almacenamiento utilizando la función getState
+                getStore: () => state.store, // Función para obtener el estado actual del almacenamiento
+                getActions: () => state.actions, // Función para obtener las acciones disponibles
+                setStore: updatedStore => // Función para actualizar el estado del almacenamiento
+                    setState({ // Actualizar el estado con el nuevo estado del almacenamiento
+                        store: Object.assign(state.store, updatedStore), // Fusionar el estado actual con el nuevo estado del almacenamiento
+                        actions: { ...state.actions } // Mantener las acciones sin cambios
+                    })
+            })
+        );
 
-		useEffect(() => {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only runs once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
-			 * store, instead use actions, like this:
-			 *
-			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
-			 *
-			 **/
-		}, []);
+        useEffect(() => {
+            /**
+             * EDITAR ESTO!
+             * Esta función es equivalente a "window.onload", se ejecuta solo una vez en toda la vida útil de la aplicación.
+             * Deberías hacer tus solicitudes ajax o fetch api aquí. No uses setState() para guardar datos en la
+             * almacenamiento, en su lugar usa acciones, así:
+             *
+             * state.actions.loadSomeData(); <---- Llamar a esta función desde las acciones de flux.js
+             *
+             **/
+        }, []); // Utilizar un arreglo vacío como dependencia para que se ejecute solo una vez al montar el componente
 
-		// The initial value for the context is not null anymore, but the current state of this component,
-		// the context will now have a getStore, getActions and setStore functions available, because they were declared
-		// on the state of this component
-		return (
-			<Context.Provider value={state}>
-				<PassedComponent {...props} />
-			</Context.Provider>
-		);
-	};
-	return StoreWrapper;
+        // El valor inicial del contexto ya no es null, sino el estado actual de este componente.
+        // El contexto ahora tendrá funciones getStore, getActions y setStore disponibles, porque fueron declaradas
+        // en el estado de este componente.
+        return (
+            <Context.Provider value={state}> {/* Proveer el estado como el valor del contexto */}
+                <PassedComponent {...props} /> {/* Renderizar el componente pasado con sus propiedades */}
+            </Context.Provider>
+        );
+    };
+    return StoreWrapper; // Retornar el componente StoreWrapper
 };
 
-export default injectContext;
+export default injectContext; // Exportar la función injectContext por defecto

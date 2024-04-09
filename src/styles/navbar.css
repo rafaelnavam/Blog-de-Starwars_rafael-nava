@@ -1,0 +1,69 @@
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: #dee2e60f !important;
+}
+
+.container-fluid { 
+    display: flex;
+    flex-wrap: inherit;
+    flex-direction: row-reverse;
+}
+
+.navbar-toggler {
+    background-color: #ffd9007e;
+    border: 1px solid #FFD700;
+    border-radius: .25rem;
+    justify-content: end;
+}
+
+
+.offcanvas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    flex-direction: row-reverse;
+}
+
+.offcanvas-end {
+    width: 270px;
+}
+
+
+.favoritos{
+    font-family: "Star Jedi", sans-serif;
+    margin-left: 10px;
+    letter-spacing: -1px;
+    color: #797979;
+}
+
+.translate-middle {
+    transform: translate(-260%, 30%) !important;
+    background-color: #ffd9007e;
+
+}
+
+.rounded-pill {
+    border-radius: 3px !important;
+}
+
+.badge {
+    color: #00000094;
+}
+
+
+.list-group-item {
+    font-family: "Star Jedi", sans-serif;
+    color: #797979;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* position: relative;
+    display: block;
+    padding: .5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125); */
+}
+

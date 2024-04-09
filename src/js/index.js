@@ -1,16 +1,17 @@
-//import react into the bundle
+// Importar React desde 'react'
 import React from 'react'
+
+// Importar createRoot desde 'react-dom/client'
 import {createRoot} from 'react-dom/client'
 
-//include your index.scss file into the bundle
+// Incluir el archivo index.scss en el bundle (presumiblemente para estilos globales)
 import "../styles/index.css";
 
-//import your own components
+// Importar el componente Layout desde './layout.js'
 import Layout from './layout.js'
 
-//
+// Se crea un nodo raíz para la aplicación React utilizando createRoot
 const root = createRoot(document.querySelector("#app"))
 
-//render your react application
+// Renderizar la aplicación React en el nodo raíz
 root.render(<Layout/>)
-

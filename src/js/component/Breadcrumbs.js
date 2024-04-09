@@ -39,7 +39,7 @@ const Breadcrumbs = ({ items }) => {
 
     // Devuelve el JSX con la estructura de las migas de pan
     return (
-        <nav aria-label="Breadcrumb">
+        <nav aria-label="nav">
             <ol className="breadcrumb">
                 {generateBreadcrumbs()} {/* Renderiza las migas de pan generadas */}
             </ol>

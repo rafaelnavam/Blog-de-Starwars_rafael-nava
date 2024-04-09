@@ -19,6 +19,28 @@
     
 }
 
+.divCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2px;
+}
+
+.detailCard {
+    width: 100%; /* O el ancho deseado */
+    max-width: 100%; /* Limita el ancho máximo */
+    overflow: hidden; /* Oculta el desbordamiento del texto */
+    white-space: nowrap; /* Evita que el texto se divida en líneas */
+    text-overflow: ellipsis; /* Añade puntos suspensivos al final del texto si se corta */
+}
+
+.btn-warning {
+    color: #00000069;
+    background-color: #85858521;
+    border-color: #ffd700;
+}
+
+
 .card-titleSingle {
 
     font-family: "Star Jedi", sans-serif;
