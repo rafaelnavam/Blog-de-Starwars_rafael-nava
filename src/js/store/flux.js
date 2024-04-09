@@ -8,14 +8,15 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             films: [],
-            people: [],
+            characters: [],
             planets: [],
             species: [],
             starships: [],
             vehicles: [],
             currentDetail: [],
             selectedCategory: null, // Inicialmente no hay categoría seleccionada
-            setSelectedItem: null //
+            setSelectedItem: null, //
+            favorites: []
 
 
         },
@@ -46,19 +47,21 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error(error.message);
                 }
             },
-         renderItems : (data, category) => {
+
+
+            renderItems: (data, category) => {
                 const navigate = useNavigate(); // Mueve la declaración de navigate aquí dentro
-            
+
                 if (data.results) {
                     return data.results.map((item, index) => (
                         <div className="cardDemo" key={index} onClick={() => {
                             console.log("Loading detail for item:", item);
                             getActions().loadDetail(item.url, navigate);
                         }}>
-                            <img src="https://starwars-visualguide.com/assets/img/placeholder.jpg" className="card-img-top" alt="..." />
+                            <img src={`https://starwars-visualguide.com/assets/img/${category}/${item.uid}.jpg`} className="card-img-top" alt="..." />
                             <div className="card-bodyDemo">
                                 <h5 className="card-titleDemo">{item.name || (item.properties && item.properties.title) || "Título no disponible"}</h5>
-                           </div>
+                            </div>
                         </div>
                     ));
                 } else if (data.result) {
@@ -67,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                             console.log("Loading detail for item:", item);
                             getActions().loadDetail(item.url, navigate);
                         }}>
-                            <img src="https://starwars-visualguide.com/assets/img/placeholder.jpg" className="card-img-top" alt="..." />
+                            <img src={`https://starwars-visualguide.com/assets/img/${category}/${item.uid}.jpg`} className="card-img-top" alt="..." />
                             <div className="card-bodyDemo">
                                 <h5 className="card-titleDemo">{item.name || (item.properties && item.properties.title) || "Título no disponible"}</h5>
                             </div>
@@ -77,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     return <>Cargando...</>;
                 }
             },
-            
+
             loadDetail: async (itemUrl, navigate) => {
                 try {
                     let url = itemUrl;
@@ -98,15 +101,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                 }
             },
 
-
-
+            handleAddToFavorites: (itemDetail) => { // Agregar itemDetail como parámetro
+                // Obtener el estado actualizado del almacén
+                const store = getStore();
+                // Agregar el ítem a la lista de favoritos
+                setStore({ ...store, favorites: [...store.favorites, itemDetail] });
+                console.log(store.favorites); // Imprimir la lista de favoritos actualizada
+            },
+            
 
             setSelectedCategory: (category) => {
                 const store = getStore();
                 setStore({ ...store, selectedCategory: category });
             },
-
-
         },
     };
 };
