@@ -8,14 +8,14 @@ const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             films: [],
-            characters: [],
+            people: [],
             planets: [],
             species: [],
             starships: [],
             vehicles: [],
             currentDetail: [],
             selectedCategory: null, // Inicialmente no hay categoría seleccionada
-            setSelectedItem: null, 
+            setSelectedItem: null,
             favorites: []
 
 
@@ -26,19 +26,19 @@ const getState = ({ getStore, getActions, setStore }) => {
                 try {
                     // Construimos la URL para la solicitud según la categoría proporcionada, si no se proporciona una URL específica
                     let url = pageUrl || `https://www.swapi.tech/api/${category}/`;
-                    
+
                     // Realizamos una solicitud a la URL construida usando fetch
                     let response = await fetch(url);
-            
+
                     // Verificamos si la respuesta de la solicitud es exitosa (status code 200-299)
                     if (!response.ok) {
                         // Si la respuesta no es exitosa, lanzamos un error con un mensaje apropiado
                         throw new Error(`No se pudieron recuperar los datos: ${response.statusText}`);
                     }
-            
+
                     // Convertimos la respuesta a formato JSON para extraer los datos
                     let data = await response.json();
-            
+
                     // Si categoryDetail o pageUrl están definidos, actualizamos el estado de la tienda
                     if (categoryDetail || pageUrl) {
                         // Obtenemos el estado actual de la tienda
@@ -57,20 +57,20 @@ const getState = ({ getStore, getActions, setStore }) => {
                     console.error(error.message);
                 }
             },
-            
+
 
             renderItems: (data, category) => {
                 // Declaramos la función navigate que será utilizada para la navegación
                 const navigate = useNavigate();
-            
+
                 // Estado para controlar la visibilidad del párrafo
                 const [isVisible, setIsVisible] = useState(false);
-                
+
                 // Función que maneja el clic en la tarjeta para cambiar la visibilidad
                 const handleClick = () => {
                     setIsVisible(!isVisible);
                 };
-            
+
                 // Comprobamos si el objeto de datos tiene la propiedad "results" (para personajes, planetas, etc.)
                 if (data.results) {
                     // Mapeamos los resultados y creamos las tarjetas correspondientes
@@ -80,21 +80,24 @@ const getState = ({ getStore, getActions, setStore }) => {
                             getActions().loadDetail(item.url, navigate);
                         }}>
                             <img
-                                src={`https://starwars-visualguide.com/assets/img/${category}/${item.uid}.jpg`}
+                                src={`https://starwars-visualguide.com/assets/img/${category === 'people' ? 'characters' : category}/${item.uid}.jpg`}
+                                // La URL de la imagen se construye dinámicamente.
+                                // Si la categoría es 'people', se usa 'characters' en lugar de 'people' en la URL.
+                                // De lo contrario, se usa la categoría actual.
                                 className="card-img-top"
                                 alt={`Image for ${item.name}`}
+                                // Texto alternativo para la imagen que incluye el nombre del item.
                                 onError={(e) => {
-                                    // Si hay un error de carga, cambiamos la fuente de la imagen por la imagen de placeholder
+                                    // Si hay un error al cargar la imagen, se reemplaza por una imagen de placeholder.
                                     e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
                                 }}
                             />
-            
                             <div className="card-bodyDemo">
                                 <h5 className="card-titleDemo">{item.name || (item.properties && item.properties.title) || "Título no disponible"}</h5>
                             </div>
                         </div>
                     ));
-                } 
+                }
                 // Comprobamos si el objeto de datos tiene la propiedad "result" (para películas)
                 else if (data.result) {
                     // Mapeamos los resultados y creamos las tarjetas correspondientes
@@ -105,11 +108,15 @@ const getState = ({ getStore, getActions, setStore }) => {
                              getActions().loadDetail(item.url, navigate);
                          }}> */}
                             <img
-                                src={`https://starwars-visualguide.com/assets/img/${category}/${item.uid}.jpg`}
+                                src={`https://starwars-visualguide.com/assets/img/${category === 'people' ? 'characters' : category}/${item.uid}.jpg`}
+                                // La URL de la imagen se construye dinámicamente.
+                                // Si la categoría es 'people', se usa 'characters' en lugar de 'people' en la URL.
+                                // De lo contrario, se usa la categoría actual.
                                 className="card-img-top"
                                 alt={`Image for ${item.name}`}
+                                // Texto alternativo para la imagen que incluye el nombre del item.
                                 onError={(e) => {
-                                    // Si hay un error de carga, cambiamos la fuente de la imagen por la imagen de placeholder
+                                    // Si hay un error al cargar la imagen, se reemplaza por una imagen de placeholder.
                                     e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
                                 }}
                             />
@@ -120,35 +127,35 @@ const getState = ({ getStore, getActions, setStore }) => {
                             </div>
                         </div>
                     ));
-                } 
+                }
                 // Si no hay resultados disponibles, mostramos un mensaje de carga
                 else {
                     return <>Cargando...</>;
                 }
             },
-            
+
 
             loadDetail: async (itemUrl, navigate) => {
                 try {
                     // Realizamos una solicitud a la URL del detalle del ítem
                     let response = await fetch(itemUrl);
-            
+
                     // Verificamos si la respuesta de la solicitud es exitosa (status code 200-299)
                     if (!response.ok) {
                         // Si la respuesta no es exitosa, lanzamos un error con un mensaje adecuado
                         throw new Error(`No se pudieron recuperar los datos: ${response.statusText}`);
                     }
-            
+
                     // Convertimos la respuesta a formato JSON para extraer los datos del detalle del ítem
                     let data = await response.json();
-            
+
                     // Actualizamos el estado del almacén con los datos del detalle del ítem
                     let store = getStore();
                     setStore({ ...store, currentDetail: data });
-            
+
                     // Navegamos a la página de detalle del ítem
                     navigate("/single");
-            
+
                     // Imprimimos el estado del almacén actualizado (solo para depuración)
                     // console.log(store);
                 } catch (error) {
@@ -156,48 +163,48 @@ const getState = ({ getStore, getActions, setStore }) => {
                     // console.error(error.message);
                 }
             },
-            
+
             handleAddToFavorites: (itemDetail) => {
                 // Obtener el estado actualizado del almacén
                 const store = getStore();
-            
+
                 // Agregar el detalle del ítem a la lista de favoritos
                 setStore({ ...store, favorites: [...store.favorites, itemDetail] });
-            
+
                 // Imprimir la lista de favoritos actualizada (solo para depuración)
                 // console.log(store.favorites);
             },
-            
+
             removeFavorite: (index) => {
                 // Obtener el estado actualizado del almacén
                 const store = getStore();
-            
+
                 // Filtrar la lista de favoritos para eliminar el ítem en el índice proporcionado
                 const newFavorites = store.favorites.filter((elemento, indice) => {
                     // Retornamos true para mantener los elementos que no coinciden con el índice proporcionado
                     return indice !== index;
                 });
-            
+
                 // Actualizar el estado del almacén con la nueva lista de favoritos
                 setStore({ ...store, favorites: newFavorites });
             },
-            
+
             numberElement: () => {
                 // Obtener el estado actual del almacén
                 const store = getStore();
-            
+
                 // Devolver la longitud de la lista de favoritos
                 return store.favorites.length;
             },
-            
+
             setSelectedCategory: (category) => {
                 // Obtener el estado actual del almacén
                 const store = getStore();
-            
+
                 // Actualizar el estado del almacén con la categoría seleccionada
                 setStore({ ...store, selectedCategory: category });
             },
-            
+
         },
     };
 };

@@ -19,6 +19,29 @@ export const Single = () => {
         }
     };
 
+    const ExtraerImagen = (itemDetail) => {
+        // Verificar si itemDetail está definido
+        if (!itemDetail || !itemDetail.properties || !itemDetail.properties.url) {
+            return ''; // Si itemDetail no está definido o no tiene la estructura esperada, retornar una cadena vacía
+        }
+
+        // URL original
+        const originalUrl = itemDetail.properties.url;
+
+        // Dividir la URL por '/'
+        const partsUrl = originalUrl.split('/');
+
+        // El último elemento contiene el número, y el segundo elemento desde el final contiene la categoría
+        const numeroExtraido = partsUrl[partsUrl.length - 1];
+        const stringExtraido = partsUrl[partsUrl.length - 2];
+
+        // Construir la nueva URL
+        return `https://starwars-visualguide.com/assets/img/${stringExtraido === 'people' ? 'characters' : stringExtraido}/${numeroExtraido}.jpg`;
+    };
+
+    // console.log(ExtraerImagen(itemDetail));
+
+
     // Verificar si itemDetail está definido
     if (!itemDetail) {
         return <div>Loading...</div>; // Si itemDetail no está definido, mostrar "Loading..."
@@ -28,7 +51,11 @@ export const Single = () => {
     return (
         <div className="d-flex justify-content-center">
             <div className="cardSingle" style={{ width: "18rem" }}>
-                <img src="https://starwars-visualguide.com/assets/img/placeholder.jpg" className="card-img-top" alt="..." />
+                {/* // se llama a la funcion para extraer imagen y se pasa como argumento itemDetail */}
+                <img src={ExtraerImagen(itemDetail)} className="card-img-top" alt="..." onError={(e) => {
+                    // Si hay un error al cargar la imagen, se reemplaza por una imagen de placeholder.
+                    e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg';
+                }} />
                 <div className="card-bodySingle">
                     <div className="divCard">
                         <h2 className="card-titleSingle">{itemDetail.properties.name || "Nombre no disponible"}</h2>
