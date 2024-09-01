@@ -32,7 +32,7 @@ services:
     name: frontend-service
     env: static
     region: ohio
-    buildCommand: "yarn build"
+    buildCommand: "npm install"
     publishPath: ./dist
     redirects:
       - source: "/*"
