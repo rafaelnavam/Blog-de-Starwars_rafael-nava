@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 
@@ -32,5 +33,10 @@ module.exports = merge(common, {
       webSocketURL: publicUrl
     },
   },
-  plugins: []
+  plugins: [
+    new HtmlWebpackPlugin({
+      favicon: '4geeks.ico',
+      template: 'template.html'
+    })
+  ]
 });
