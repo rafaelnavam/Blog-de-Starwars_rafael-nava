@@ -18,7 +18,7 @@
 }
 
 .col-12 {
-margin-top: 50px;
+    margin-top: 50px;
 
 }
 
@@ -36,15 +36,18 @@ margin-top: 50px;
 /* Estilos para la carta */
 .cardDemo {
     width: 15%;
-    border-radius: 10px; /* Borde redondeado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: transform 0.3s ease; /* Transición al hacer clic */
+    border-radius: 10px;
+    /* Borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: transform 0.3s ease;
+    /* Transición al hacer clic */
     margin: 20px;
     padding: 0%;
     text-align: center;
     background: white;
     padding: 1px;
-    
+
 }
 
 .card-titleDemo {
@@ -58,11 +61,11 @@ margin-top: 50px;
     margin: 0%;
 }
 
-/* Estilos para la imagen dentro de la carta */
 .cardDemo img {
-
     height: 150px;
     border-radius: 10px;
+    width: 100%;
+    /* Asegúrate de que la imagen se adapte al ancho de la carta */
 }
 
 
@@ -73,31 +76,48 @@ margin-top: 50px;
 
 /* Estilos al pasar el mouse sobre la carta */
 .cardDemo:hover {
-    transform: translateY(-5px); /* Eleva la carta cuando se pasa el mouse */
+    transform: translateY(-5px);
+    /* Eleva la carta cuando se pasa el mouse */
 }
 
 /* Estilos al hacer clic en la carta */
 .cardDemo:active {
-    transform: translateY(2px); /* Efecto de hundimiento al hacer clic */
+    transform: translateY(2px);
+    /* Efecto de hundimiento al hacer clic */
 }
 
 
 
 
 
-/* Estilos para la carta */
 .cardDemo {
-    width: 15%;
-    border-radius: 10px; /* Borde redondeado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: transform 0.3s ease; /* Transición al hacer clic */
+    flex-basis: 15%;
+    /* Utiliza flex-basis en lugar de width */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
     margin: 20px;
     padding: 0%;
     text-align: center;
     background: white;
     padding: 1px;
-    
 }
+
+/* Estilos para la carta en diferentes tamaños de pantalla */
+@media (max-width: 768px) {
+    .cardDemo {
+        flex-basis: 30%;
+        /* Ajusta el ancho de la carta en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .cardDemo {
+        flex-basis: 45%;
+        /* Ajusta el ancho de la carta en pantallas más pequeñas */
+    }
+}
+
 
 .card-titleDemoFilms {
 
@@ -114,15 +134,18 @@ margin-top: 50px;
 
 .cardDemoFilms {
     width: 20%;
-    border-radius: 10px; /* Borde redondeado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: transform 0.3s ease; /* Transición al hacer clic */
+    border-radius: 10px;
+    /* Borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: transform 0.3s ease;
+    /* Transición al hacer clic */
     margin: 20px;
     padding: 0%;
     text-align: center;
     background: white;
     padding: 1px;
-    
+
 }
 
 .card-textDemoFilms {
@@ -149,10 +172,12 @@ margin-top: 50px;
 
 /* Estilos al pasar el mouse sobre la carta */
 .cardDemoFilms:hover {
-    transform: translateY(-5px); /* Eleva la carta cuando se pasa el mouse */
+    transform: translateY(-5px);
+    /* Eleva la carta cuando se pasa el mouse */
 }
 
 /* Estilos al hacer clic en la carta */
 .cardDemoFilms:active {
-    transform: translateY(2px); /* Efecto de hundimiento al hacer clic */
+    transform: translateY(2px);
+    /* Efecto de hundimiento al hacer clic */
 }

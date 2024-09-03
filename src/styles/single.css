@@ -1,4 +1,4 @@
-.col-4 img{
+.col-4 img {
     height: 20rem;
     width: 10rem;
 }
@@ -7,31 +7,54 @@
 /* Estilos para la carta */
 .cardSingle {
     width: 27%;
-    border-radius: 10px; /* Borde redondeado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: transform 0.3s ease; /* Transición al hacer clic */
+    border-radius: 10px;
+    /* Borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: transform 0.3s ease;
+    /* Transición al hacer clic */
     margin: 20px;
     padding: 0%;
     text-align: center;
     background: white;
     color: black;
     padding: 1px;
-    
 }
 
-.divCard {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 2px;
+/* Media query para pantallas pequeñas y medianas */
+@media (max-width: 768px) {
+    .cardSingle {
+        width: 40%;
+    }
 }
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .cardSingle {
+        width: 60%;
+    }
+}
+
+/* Estilos para el contenedor .row */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
 
 .detailCard {
-    width: 100%; /* O el ancho deseado */
-    max-width: 100%; /* Limita el ancho máximo */
-    overflow: hidden; /* Oculta el desbordamiento del texto */
-    white-space: nowrap; /* Evita que el texto se divida en líneas */
-    text-overflow: ellipsis; /* Añade puntos suspensivos al final del texto si se corta */
+    width: 100%;
+    /* O el ancho deseado */
+    max-width: 100%;
+    /* Limita el ancho máximo */
+    overflow: hidden;
+    /* Oculta el desbordamiento del texto */
+    white-space: nowrap;
+    /* Evita que el texto se divida en líneas */
+    text-overflow: ellipsis;
+    /* Añade puntos suspensivos al final del texto si se corta */
 }
 
 .btn-warning {
@@ -41,8 +64,8 @@
 }
 
 
+/* Estilos para el título de la carta */
 .card-titleSingle {
-
     font-family: "Star Jedi", sans-serif;
     font-weight: 800;
     font-size: 35px;
@@ -52,7 +75,21 @@
     margin: 0%;
 }
 
-.card-textSingle{
+/* Media query para pantallas pequeñas y medianas */
+@media (max-width: 768px) {
+    .card-titleSingle {
+        font-size: 25px;
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .card-titleSingle {
+        font-size: 18px;
+    }
+}
+
+.card-textSingle {
     font-family: "Star Jedi", sans-serif;
 
     letter-spacing: -1px;
@@ -63,9 +100,8 @@
 
 /* Estilos para la imagen dentro de la carta */
 .cardSingle img {
-
-    height: 150px;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 

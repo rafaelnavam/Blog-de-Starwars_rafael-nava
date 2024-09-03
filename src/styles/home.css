@@ -1,12 +1,5 @@
-.titulo1 {
-    font-family: "Star Jedi", sans-serif;
-    font-weight: 700;
-    font-size: 78px;
-    letter-spacing: 1px;
-    text-align: center;
-    color: #FFD700;
-    margin-bottom: -2%; /* Agrega esta línea para eliminar el espacio debajo del título */
-}
+/* Estilos para el título */
+.titulo1,
 .titulo2 {
     font-family: "Star Jedi", sans-serif;
     font-weight: 700;
@@ -14,7 +7,26 @@
     letter-spacing: 1px;
     text-align: center;
     color: #FFD700;
-    margin-top: -2%; /* Agrega esta línea para eliminar el espacio debajo del título */
+    margin-bottom: -2%;
+    /* Agrega esta línea para eliminar el espacio debajo del título */
+}
+
+/* Media query para pantallas pequeñas y medianas */
+@media (max-width: 768px) {
+
+    .titulo1,
+    .titulo2 {
+        font-size: 48px;
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+
+    .titulo1,
+    .titulo2 {
+        font-size: 36px;
+    }
 }
 
 .subtitulo {
@@ -24,7 +36,8 @@
     letter-spacing: 1px;
     text-align: center;
     color: #898989ae;
-    margin-bottom: 0%; /* Agrega esta línea para eliminar el espacio debajo del subtítulo */
+    margin-bottom: 0%;
+    /* Agrega esta línea para eliminar el espacio debajo del subtítulo */
     margin-top: 0%;
 }
 
@@ -38,13 +51,29 @@
 /* Estilos para la carta */
 .cardHome {
     width: 27%;
-    border-radius: 10px; /* Borde redondeado */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
-    transition: transform 0.3s ease; /* Transición al hacer clic */
+    border-radius: 10px;
+    /* Borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra */
+    transition: transform 0.3s ease;
+    /* Transición al hacer clic */
     margin: 20px;
     padding: 0%;
     text-align: center;
-    
+}
+
+/* Media query para pantallas pequeñas y medianas */
+@media (max-width: 768px) {
+    .cardHome {
+        width: 40%;
+    }
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 480px) {
+    .cardHome {
+        width: 60%;
+    }
 }
 
 .card-titleHome {
@@ -78,10 +107,12 @@
 
 /* Estilos al pasar el mouse sobre la carta */
 .cardHome:hover {
-    transform: translateY(-5px); /* Eleva la carta cuando se pasa el mouse */
+    transform: translateY(-5px);
+    /* Eleva la carta cuando se pasa el mouse */
 }
 
 /* Estilos al hacer clic en la carta */
 .cardHome:active {
-    transform: translateY(2px); /* Efecto de hundimiento al hacer clic */
+    transform: translateY(2px);
+    /* Efecto de hundimiento al hacer clic */
 }
